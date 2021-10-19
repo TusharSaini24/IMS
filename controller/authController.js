@@ -1,10 +1,17 @@
+const Faculty = require('../models/faculty')
+
 exports.login = (req,res) => {
     res.render('login')
 }
 
-exports.dashboard = (req,res) => {
+exports.dashboard = async (req,res) => {
     // console.log(req.body);
-    res.render('dashboard')
+
+    const result = await Faculty.find()
+
+    console.log(result[0].filePath);
+
+    res.render('dashboard',{image:result[0].filePath})
 }
 
 exports.postLogin = (req,res) => {
