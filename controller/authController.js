@@ -1,7 +1,16 @@
 const Faculty = require('../models/faculty')
 
 exports.login = (req,res) => {
+    console.log("session in login",req.session.user);
     res.render('login',{msg:''})
+}
+
+exports.logout = (req,res) => {
+    console.log("session in logout",req.session.user);
+    req.session.destroy((err) => {
+        console.log(err);
+        res.redirect('/')
+    })
 }
 
 exports.dashboard = async (req,res) => {
@@ -28,7 +37,6 @@ exports.postLogin = async (req,res) => {
         req.session.user = result[0]
         req.session.save(() => {
             res.redirect('/dashboard')
-
         })
 
     }

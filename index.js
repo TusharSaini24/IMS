@@ -34,6 +34,8 @@ app.use(session({
     saveUninitialized: true
   }));
 
+
+  //TllJ0mCnrp4MHUL8AFUcXlynMh2E06As
 app.use('/', authRoutes)
 app.use('/', adminRoutes)
 
