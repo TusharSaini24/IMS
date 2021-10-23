@@ -30,12 +30,12 @@ app.use(session({
       maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
     },
     store: store,
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false
   }));
 
 
-  //TllJ0mCnrp4MHUL8AFUcXlynMh2E06As
+
 app.use('/', authRoutes)
 app.use('/', adminRoutes)
 

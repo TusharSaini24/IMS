@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const adminController = require('../controller/adminController')
 const multer = require('multer')
+const isAuth = require('../middleware/isAuth')
 
 
 const storage = multer.diskStorage({
@@ -15,10 +16,9 @@ const storage = multer.diskStorage({
   
 const upload = multer({ storage: storage })
 
-router.get('/addfaculty', adminController.addfaculty)
+router.get('/addfaculty', isAuth, adminController.addfaculty)
 
 router.post('/savefaculty',upload.single('fufile'), adminController.savefaculty)
-
 
 
 module.exports = router

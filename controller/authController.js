@@ -1,12 +1,12 @@
 const Faculty = require('../models/faculty')
 
 exports.login = (req,res) => {
-    console.log("session in login",req.session.user);
+    // console.log("session in login",req.session.user);
     res.render('login',{msg:''})
 }
 
 exports.logout = (req,res) => {
-    console.log("session in logout",req.session.user);
+    // console.log("session in logout",req.session.user);
     req.session.destroy((err) => {
         console.log(err);
         res.redirect('/')
