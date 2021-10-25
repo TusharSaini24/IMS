@@ -44,3 +44,21 @@ exports.savefaculty = async (req,res) => {
     // console.log(req.file);
     // res.render('admin/addFaculty')
 }
+
+exports.viewFaculty = async (req,res)=>{
+    var result = await Faculty.find({role:2});
+    res.render('admin/viewFaculty',{result});
+}
+
+exports.editFaculty = async (req,res)=>{
+
+    const id = req.params.id
+    // console.log(id);
+    var result = await Faculty.findById(id)
+    // console.log(result);
+    var temp = result.filePath.split('/')
+    var temp2 = temp.splice(0,1)
+    // console.log(temp.join('/'));
+    var _filepath = "/" + temp.join('/')
+    res.render('admin/editFaculty',{result,_filepath,msg:''});
+}

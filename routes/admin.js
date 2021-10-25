@@ -20,5 +20,8 @@ router.get('/addfaculty', isAuth, adminController.addfaculty)
 
 router.post('/savefaculty',upload.single('fufile'), adminController.savefaculty)
 
+router.get('/viewfaculty',isAuth,adminController.viewFaculty);
+
+router.get('/editfaculty/:id',isAuth,adminController.editFaculty);
 
 module.exports = router

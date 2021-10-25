@@ -1,0 +1,123 @@
+<%- include('../partials/head')%>
+
+<%- include('../partials/topbar')%>
+
+<%- include('../partials/sidebar')%>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><%= msg%></h2>
+                        <h1>
+                            Edit Faculty   
+                        </h1>
+                       
+                    </div>
+                    <form action="/savefaculty" method="post" enctype="multipart/form-data">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="email" placeholder="Enter the Email" value="<%= result.email%>" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="fname" placeholder="First name" value="<%= result.name.split(' ')[0]%>" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="lname" placeholder="Last name" value="<%= result.name.split(' ')[1]%>"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <b>Department</b>
+                                </p>
+                                <select class="form-control show-tick" name="department">
+                                    <option>--select any--</option>
+                                    <% if (result.department == 'BCA') {%>
+                                        <option value="BCA" selected>BCA</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="BBA">BBA</option>
+                                        <option value="MBA">MBA</option>
+                                    <% } %>
+                                    <% if (result.department == 'MCA') {%>
+                                        <option value="BCA">BCA</option>
+                                        <option value="MCA" selected>MCA</option>
+                                        <option value="BBA">BBA</option>
+                                        <option value="MBA">MBA</option>
+                                    <% } %>
+                                    <% if (result.department == 'BBA') {%>
+                                        <option value="BCA">BCA</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="BBA" selected>BBA</option>
+                                        <option value="MBA">MBA</option>
+                                    <% } %>
+                                    <% if (result.department == 'MBA') {%>
+                                        <option value="BCA">BCA</option>
+                                        <option value="MCA">MCA</option>
+                                        <option value="BBA">BBA</option>
+                                        <option value="MBA" selected>MBA</option>
+                                    <% } %>
+                                    
+
+                                </select>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <p>
+                                        <b>Technology</b>
+                                    </p>
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="technology" placeholder="Enter Technology" value="<%= result.technology%>"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <img src="<%= _filepath%>" alt="" height="100" width="100">
+                            <!-- <img src="/uploads/faculty/sainitushar239@gamil.com_ID.jpeg" alt="" height="100" width="100"> -->
+                           <!-- File Upload | Drag & Drop OR With Click & Choose -->
+            
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                UPLOAD ID
+                            </h2>
+                        </div>
+                                <div class="fallback">
+                                    <input type="file" name="fufile" />
+                                </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block btn-lg bg-red waves-effect" style="font-size:20px;font-weight:bolder">Submit</button>
+            <!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
+                        </div>
+                        
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/bottom')%>
