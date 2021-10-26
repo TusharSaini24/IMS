@@ -7,20 +7,14 @@ exports.addfaculty = (req,res) => {
 }
 
 exports.savefaculty = async (req,res) => {
-    // console.log(req.body);
-
-    // console.log(req.file);
 
     var prevFilepath = req.file.destination + "/" + req.file.filename
     var _filepath = req.file.destination + "/" + req.body.email + "_ID" + "." + req.file.mimetype.split('/')[1]
-    // var filename = req.body.email + "_ID" + "." + req.file.mimetype.split('/')[1]
 
     await fs.rename(prevFilepath, _filepath, (err) => {
         if ( err ) console.log('ERROR: ' + err);
     });
 
-    // console.log(prevFilename);
-    // console.log(_filepath);
     var data = {
         email:req.body.email,
         password:req.body.password,
@@ -40,9 +34,6 @@ exports.savefaculty = async (req,res) => {
     else {
         return res.status(200).render('admin/addfaculty',{msg:"Error Occured.Try Again"})
     }
-    // console.log(result);
-    // console.log(req.file);
-    // res.render('admin/addFaculty')
 }
 
 exports.viewFaculty = async (req,res)=>{
@@ -61,4 +52,64 @@ exports.editFaculty = async (req,res)=>{
     // console.log(temp.join('/'));
     var _filepath = "/" + temp.join('/')
     res.render('admin/editFaculty',{result,_filepath,msg:''});
+}
+
+exports.editFacultyToDB = async (req,res) => {
+    // console.log(req.params.id);
+    // console.log(req.body);
+    // console.log(req.file);
+
+    var id = req.params.id
+    var person = await Faculty.findById(id)
+    if(req.file == undefined) {
+
+        var prevFilepath = person.filePath
+        var temp = prevFilepath.split('/')[3]
+        var ext = temp.split('ID')[1]
+        var _filepath = "public/uploads/faculty/" + req.body.email + "_ID" + "." + ext
+    
+        await fs.rename(prevFilepath, _filepath, (err) => {
+            if ( err ) console.log('ERROR: ' + err);
+        });
+
+
+        var data = {
+            email:req.body.email,
+            name:req.body.fname + " " + req.body.lname,
+            department:req.body.department,
+            technology:req.body.technology,
+        }
+
+        const result1 = await Faculty.findByIdAndUpdate(id,data,{new:true})
+        // console.log(result);
+
+        return res.redirect('/viewfaculty')
+    }
+    else {
+
+        var oldFilePath = person.filePath
+
+        await fs.unlink(oldFilePath, (err) => {
+            if ( err ) console.log('ERROR: ' + err);
+        })
+
+        var prevFilepath = req.file.destination + "/" + req.file.filename
+        var _filepath = req.file.destination + "/" + req.body.email + "_ID" + "." + req.file.mimetype.split('/')[1]
+    
+        await fs.rename(prevFilepath, _filepath, (err) => {
+            if ( err ) console.log('ERROR: ' + err);
+        });
+
+        var data = {
+            email:req.body.email,
+            name:req.body.fname + " " + req.body.lname,
+            department:req.body.department,
+            technology:req.body.technology,
+            filePath:_filepath
+        }
+        const result1 = await Faculty.findByIdAndUpdate(id,data,{new:true})
+        // console.log(result);
+
+        return res.redirect('/viewfaculty')
+    }
 }

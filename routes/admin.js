@@ -24,4 +24,6 @@ router.get('/viewfaculty',isAuth,adminController.viewFaculty);
 
 router.get('/editfaculty/:id',isAuth,adminController.editFaculty);
 
+router.post('/editfacultyToDB/:id',upload.single('fufile'),adminController.editFacultyToDB);
+
 module.exports = router

@@ -16,6 +16,7 @@ const PORT = process.env.PORT
 
 const authRoutes = require('./routes/auth')
 const adminRoutes = require('./routes/admin')
+const facultyRoutes = require('./routes/faculty')
 
 
 app.use(express.urlencoded({extended:false}))
@@ -38,6 +39,7 @@ app.use(session({
 
 app.use('/', authRoutes)
 app.use('/', adminRoutes)
+app.use('/', facultyRoutes)
 
 app.get('*',(req,res) => {
     res.render('404')
