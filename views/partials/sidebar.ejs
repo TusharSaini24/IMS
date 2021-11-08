@@ -21,6 +21,7 @@
                             <span>Home</span>
                         </a>
                     </li>
+                    <% if(role == 1) {%>
                     <li>
                         <a href="/addfaculty">
                             <i class="material-icons">add</i>
@@ -33,6 +34,8 @@
                             <span>View Faculty</span>
                         </a>
                     </li>
+                    <% } %>
+                    <% if(role == 2) {%>
                     <li>
                         <a href="/addstudent">
                             <i class="material-icons">add</i>
@@ -42,23 +45,41 @@
                     <li>
                         <a href="/viewstudent">
                             <i class="material-icons">list</i>
-                            <span>View Students</span>
+                            <span>View Student</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">swap_calls</i>
-                            <span>User Interface (UI)</span>
+                            <span>Upload Data</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="pages/ui/alerts.html">Alerts</a>
+                                <a href="/posttimetable">Upload Timetable</a>
                             </li>
                             <li>
-                                <a href="pages/ui/tabs.html">Tabs</a>
+                                <a href="/postdatesheet">Upload Date-Sheet</a>
+                            </li>
+                            <li>
+                                <a href="/postassignment">Upload Assignment</a>
                             </li>
                         </ul>
                     </li>
+                    <% } %>
+                    <% if(role == 3) {%>
+                        <li>
+                            <a href="/notifications">
+                                <i class="material-icons">notifications_active</i>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="/viewfaculty">
+                                <i class="material-icons">list</i>
+                                <span>View Faculty</span>
+                            </a>
+                        </li> -->
+                        <% } %>
                 </ul>
             </div>
             <!-- #Menu -->

@@ -1,4 +1,7 @@
+const bcrypt = require('bcrypt')
+
 const Faculty = require('../models/faculty')
+const Student = require("../models/student");
 
 exports.login = (req,res) => {
     // console.log("session in login",req.session.user);
@@ -22,29 +25,49 @@ exports.dashboard = async (req,res) => {
     // console.log(result[0].filePath);
 
     // res.render('dashboard',{image:result[0].filePath})
-    res.render('dashboard')
+    res.render('dashboard',{role:req.session.user.role})
 }
 
-exports.postLogin = async (req,res) => {
+exports.postLogin = async(req,res)=>{
+    // console.log('hello');
     // console.log(req.body);
-    var email = req.body.email
-    var password = req.body.password
 
-    var result = await Faculty.find({email:email,password:password})
-    // console.log(result);
-    if(result.length > 0) {
-
-        req.session.user = result[0]
-        req.session.save(() => {
-            res.redirect('/dashboard')
-        })
-
+    const email = req.body.email;
+    const password = req.body.password;
+    let result
+    if(req.body.isfaculty == 'on') {
+        result = await Faculty.find({email : email});   
     }
     else {
-        res.render('login',{msg:"Incorrect Details"})
+        result = await Student.find({email : email});
     }
 
+    // console.log(result);
 
+    // console.log('EandP',result);
 
-    // res.redirect('/dashboard')
+    if(result.length > 0 ) // user is email and password is valid or not
+    {
+        const isValid = bcrypt.compareSync(password, result[0].password);
+        if(!isValid) {
+            return res.render('login',{msg: "Incorrect Password"});
+        }
+        req.session.user = result[0];
+        req.session.save(()=>{
+            res.redirect('/dashboard');
+        })
+        // if(req.body.rememberme == 'on') {
+        //     req.session.user = result[0];
+        //     req.session.save(()=>{
+        //         res.redirect('/dashboard');
+        //     })
+        // }
+        // else {
+        //     res.redirect('/dashboard');
+        // }
+    }
+    else{
+        res.render('login',{msg: "Incorrect details"});
+    }
+
 }
