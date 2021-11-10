@@ -45,7 +45,7 @@ app.get('*',(req,res) => {
     res.render('404')
 })
 
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_LIVE)
         .then(() => {
             console.log("Database Connected");
                 app.listen(PORT,() => {

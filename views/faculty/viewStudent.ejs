@@ -1,0 +1,54 @@
+<%- include('../partials/head')%>
+
+<%- include('../partials/topbar')%>
+
+<%- include('../partials/sidebar')%>
+
+
+<section class="content">
+        <!-- Exportable Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            STUDENT DETAILS
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Course</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% result.forEach((element , idk , result)=>{ %>
+                                        <tr>
+                                            <td><%= element.name%></td>
+                                            <td><%= element.email%></td>
+                                            <td><%= element.course%></td>
+                                            <td>
+                                                <a  href="/editstudent/<%= element._id %>" type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Exportable Table -->
+    </div>
+</section>
+
+<%- include('../partials/bottom')%>
