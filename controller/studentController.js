@@ -6,6 +6,16 @@ const nodemailer = require('nodemailer')
 
 require('dotenv').config()
 
+var transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD
+    }
+  });
+
 exports.notifications = async (req,res) => {
 
     var stuCourse = req.session.user.course
@@ -61,5 +71,22 @@ exports.sendfee = async (req,res) => {
     if(course == 'BCA') fees = 12000
     if(course == 'MCA') fees = 22000
 
-    res.render('student/Payment',{user:result,role:3,fees,disable:true,msg:'Fee Payed Successfully'})
+    var mailOptions = {
+        from: process.env.EMAIL,
+        to: result.email,
+        subject: 'Fees Payed Sucessfully',
+        html: `<h1 style="color:blue">Hello ${result.name}</h1><br><br>
+                You have successfully paid fees Rs.${fees} for your course ${course}<br><br>Thank You<br><br>IMS`
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error)
+            return res.render('student/Payment',{user:result,role:3,fees,disable:true,msg:'Fee Payed Successfully'}) 
+        } else {
+            // console.log(info);
+            return res.render('student/Payment',{user:result,role:3,fees,disable:true,msg:'Fee Payed Successfully'})
+        }
+      });
+
 }
