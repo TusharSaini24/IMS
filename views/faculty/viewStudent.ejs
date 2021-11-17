@@ -24,6 +24,7 @@
                                         <th>Email</th>
                                         <th>Course</th>
                                         <th>Edit</th>
+                                        <th>Fee Payed</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,11 +33,18 @@
                                             <td><%= element.name%></td>
                                             <td><%= element.email%></td>
                                             <td><%= element.course%></td>
-                                            <td>
-                                                <a  href="/editstudent/<%= element._id %>" type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">edit</i>
-                                                </a>
-                                            </td>
+
+                                            <% if(element.feePayed) {%>
+                                                <td>Payed</td>
+                                                <% } else {%>
+                                                <td>Not Payed</td>
+                                                <% } %>
+                                                <td>
+                                                    <a  href="/editstudent/<%= element._id %>" type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                </td>
+
                                         </tr>
                                     <% }) %>
                                     

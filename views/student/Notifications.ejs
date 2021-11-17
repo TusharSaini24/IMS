@@ -16,16 +16,26 @@
                                         </h1>
                                     </center>
 
-
+                                    <% if(filepath_TT) {%>
                                     <div class="alert alert-success">
                                         <a class="alert-link" href="<%= filepath_TT%>">Click here to download Timetable</a>
                                     </div>
+                                    <% } %>
+                                    <% if(filepath_DS) {%>
                                     <div class="alert alert-info">
                                         <a class="alert-link" href="<%= filepath_DS%>">Click here to download Datesheet</a>
                                     </div>
+                                    <% } %>
+                                    <% if(filepath_ASSN) {%>
                                     <div class="alert alert-warning">
                                         <a class="alert-link" href="<%= filepath_ASSN%>">Click here to download Assignemt</a>
                                     </div>
+                                    <% } %>
+                                    <% if(!feePayed) {%>
+                                    <div class="alert alert-danger">
+                                        <a class="alert-link" href="/payfee/<%= id%>">Click here to Pay the fees</a>
+                                    </div>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

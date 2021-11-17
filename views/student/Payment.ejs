@@ -10,21 +10,22 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h2><%= msg%></h2>
                         <h1>
-                            Edit Faculty   
+                            Payment Form  
                         </h1>
-                       
+                       <h2>
+                           <%= msg%>
+                       </h2>
                     </div>
-                    <form action="/editStudentToDB/<%= result._id%>" method="post" enctype="multipart/form-data">
+                    <form action="/sendfee/<%= user._id%>" method="post">
                         
-                    <img src="<%= _filepath%>" alt="" height="100" width="100">
+                    <!-- <img src="<%= user.filepath%>" alt="" height="100" width="100"> -->
                     <div class="body">
                         <div class="row clearfix ">
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="email" placeholder="Enter the Email" value="<%= result.email%>" />
+                                        <input type="text" class="form-control" name="email" placeholder="Enter the Email" value="<%= user.email%>" disabled/>
                                     </div>
                                 </div>
                             </div>
@@ -33,14 +34,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="fname" placeholder="First name" value="<%= result.name.split(' ')[0]%>" />
+                                        <input type="text" class="form-control" name="fname" placeholder="First name" value="<%= user.name.split(' ')[0]%>" disabled/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="lname" placeholder="Last name" value="<%= result.name.split(' ')[1]%>"/>
+                                        <input type="text" class="form-control" name="lname" placeholder="Last name" value="<%= user.name.split(' ')[1]%>" disabled/>
                                     </div>
                                 </div>
                             </div>
@@ -48,27 +49,27 @@
                                 <p>
                                     <b>Course</b>
                                 </p>
-                                <select class="form-control show-tick" name="course">
+                                <select class="form-control show-tick" name="course" disabled>
                                     <option>--select any--</option>
-                                    <% if (result.course == 'BCA') {%>
+                                    <% if (user.course == 'BCA') {%>
                                         <option value="BCA" selected>BCA</option>
                                         <option value="MCA">MCA</option>
                                         <option value="BBA">BBA</option>
                                         <option value="MBA">MBA</option>
                                     <% } %>
-                                    <% if (result.course == 'MCA') {%>
+                                    <% if (user.course == 'MCA') {%>
                                         <option value="BCA">BCA</option>
                                         <option value="MCA" selected>MCA</option>
                                         <option value="BBA">BBA</option>
                                         <option value="MBA">MBA</option>
                                     <% } %>
-                                    <% if (result.course == 'BBA') {%>
+                                    <% if (user.course == 'BBA') {%>
                                         <option value="BCA">BCA</option>
                                         <option value="MCA">MCA</option>
                                         <option value="BBA" selected>BBA</option>
                                         <option value="MBA">MBA</option>
                                     <% } %>
-                                    <% if (result.course == 'MBA') {%>
+                                    <% if (user.course == 'MBA') {%>
                                         <option value="BCA">BCA</option>
                                         <option value="MCA">MCA</option>
                                         <option value="BBA">BBA</option>
@@ -79,44 +80,37 @@
                                 </select>
 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <p>
-                                    <b>Fees Payed</b>
+                                    <b>Fees</b>
+                                </p>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="lname" placeholder="Last name" value="<%= fees%>" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <p>
+                                    <b>Payment method </b>
                                 </p>
                                 <select class="form-control show-tick" name="fees">
-                                    <option>--select any--</option>
-                                    <% if (result.feePayed) {%>
-                                        <option value="true" selected>Yes</option>
-                                        <option value="false">No</option>
-                                    <% } else {%>
-                                        <option value="true" >Yes</option>
-                                        <option value="false" selected>No</option>
-                                    <% } %>
                                 </select>
 
-                            </div>
+                            </div> -->
             
 
                             <!-- <img src="/uploads/faculty/sainitushar239@gamil.com_ID.jpeg" alt="" height="100" width="100"> -->
                            <!-- File Upload | Drag & Drop OR With Click & Choose -->
-            
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                UPLOAD NEW PHOTO
-                            </h2>
-                        </div>
-                                <div class="fallback">
-                                    <input type="file" name="fufile"/>
-                                </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-block btn-lg bg-red waves-effect" style="font-size:20px;font-weight:bolder">Submit</button>
-            <!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
+            <% if(disable) {%>
+                <button type="submit" class="btn btn-block btn-lg bg-red waves-effect" style="font-size:20px;font-weight:bolder" disabled>Submit</button>
+                <% } else { %>
+                <button type="submit" class="btn btn-block btn-lg bg-red waves-effect" style="font-size:20px;font-weight:bolder" >Submit</button>
+                    <% } %>
+                <!-- #END# File Upload | Drag & Drop OR With Click & Choose -->
                         </div>
                         
-                            </div>
+                        </div>
                         </form>
                         </div>
                         </div>

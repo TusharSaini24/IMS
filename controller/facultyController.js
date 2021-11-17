@@ -33,7 +33,8 @@ exports.saveStudent = async(req,res)=>{
        name:req.body.fname + " " + req.body.lname,
        role:3,
        course:req.body.course,
-       filePath:_filepath
+       filePath:_filepath,
+       feePayed:req.body.fees
 
    }
 
@@ -92,7 +93,8 @@ exports.editStudentToDB = async(req,res)=>{
             email:req.body.email,
             name:req.body.fname + " " + req.body.lname,
             course:req.body.course,
-            filePath:_filepath
+            filePath:_filepath,
+            feePayed:req.body.fees
         }
         // if don't add new = true here then it will give only prev data 
         const result = await Student.findByIdAndUpdate(id,data,{new:true});
@@ -117,7 +119,8 @@ exports.editStudentToDB = async(req,res)=>{
             email:req.body.email,
             name:req.body.fname + " " + req.body.lname,
             course:req.body.course,
-            filePath:_filepath
+            filePath:_filepath,
+            feePayed:req.body.fees
         }
         const result1 = await Student.findByIdAndUpdate(id,data,{new:true})
         // console.log(result);
