@@ -7,7 +7,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config()
 
 var store = new MongoDBStore({
-    uri: process.env.MONGO_URL,
+    uri: process.env.MONGO_LIVE,
     collection: 'sessions'
   });
 
